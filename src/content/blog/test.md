@@ -2,7 +2,13 @@
 title: 'Test Post'
 description: 'This is a simple test post.'
 pubDate: 'Jun 08 2025'
-heroImage: '/images/test.jpg' 
+heroImage: '/images/test.jpg'
 ---
 
-This is a test blog post to verify everything is working correctly with the date format you want.
+Test blog post with an image in the body.
+
+Here is an image:
+
+![Test Image](/images/test.jpg)
+
+And here’s some more text after the image.
