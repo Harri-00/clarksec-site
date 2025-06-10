@@ -5,22 +5,202 @@ import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      #terminal {
+        width: 100%;
+        max-width: 900px;
+        height: 600px;
+        background-color: #003366;
+        border-radius: 8px;
+        margin: 1rem auto;
+        box-shadow: 0 0 10px #002244aa;
+        display: flex;
+        flex-direction: column;
+        font-family: monospace;
+        color: white;
+      }
+
+      #menu-bar {
+        height: 28px;
+        background: linear-gradient(45deg, #004080, #002050);
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        color: #ccc;
+        font-size: 14px;
+        user-select: none;
+      }
+
+      #menu-bar span {
+        margin-right: 12px;
+        cursor: default;
+      }
+
+      #menu-bar span.circle {
+        height: 14px;
+        width: 14px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 8px;
+      }
+
+      #menu-bar span.red { background-color: #ff5f56; }
+      #menu-bar span.yellow { background-color: #ffbd2e; }
+      #menu-bar span.green { background-color: #27c93f; }
+
+      #typed-text {
+        flex-grow: 1;
+        padding: 12px 16px;
+        white-space: pre-wrap;
+        overflow-y: auto;
+        font-size: 18px;
+        line-height: 1.4;
+        user-select: none;
+      }
+
+      .cursor {
+        display: inline-block;
+        width: 10px;
+        height: 20px;
+        background-color: white;
+        animation: blink 1s steps(2, start) infinite;
+        vertical-align: bottom;
+        margin-left: 2px;
+      }
+
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        50.01%, 100% { opacity: 0; }
+      }
+    </style>
   </head>
   <body>
     <Header />
     <main style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
       <h1>Welcome to ClarkSec</h1>
-      <p>
-        Hi, I’m Harrison Clark. This is my cybersecurity portfolio and blog where I share writeups,
-        incident analysis, and practical infosec insights from the field.
-      </p>
-      <p>
-        Feel free to browse my latest posts or explore my projects.
+
+      <div id="terminal" role="region" aria-label="Terminal window">
+        <div id="menu-bar" aria-hidden="true">
+          <span class="circle red"></span>
+          <span class="circle yellow"></span>
+          <span class="circle green"></span>
+          <span>Terminal</span>
+        </div>
+        <pre id="typed-text" aria-live="polite" aria-atomic="false" aria-relevant="additions"></pre>
+      </div>
     </main>
     <Footer />
+
+    <script type="module">
+      const typedText = document.getElementById("typed-text");
+      if (!typedText) throw new Error("Typed text container missing");
+
+      const cursor = document.createElement("span");
+      cursor.className = "cursor";
+
+      // Helper to pad numbers < 10
+      const pad = (n) => (n < 10 ? "0" + n : n);
+      const now = new Date();
+      const timestamp = `${now.toDateString()} ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+
+      const initialPrompt = "harrison@local:~$ ";
+      const sshCommand = "ssh harrison@clarksec.com";
+      const passwordPrompt = "harrison@clarksec.com's password: ";
+
+      const sshBanner = 
+        `\nWelcome to Parrot Security OS 6.1 (GNU/Linux 6.5.0-parrot-amd64 x86_64)\n` +
+        `Last login: ${timestamp} from 192.168.1.100\n\n`;
+
+      const bodyLines = [
+        "Hi, I’m Harrison Clark. This is my cybersecurity portfolio and blog where I share writeups,",
+        "incident analysis, and practical infosec insights from the field.",
+        "",
+        "Feel free to browse my latest posts or explore my projects.",
+        "",
+      ];
+
+      let fullText = initialPrompt;
+      typedText.textContent = fullText;
+      typedText.appendChild(cursor);
+
+      let charIndex = 0;
+      let step = 0;
+
+      function typeSSHCommand() {
+        if (charIndex < sshCommand.length) {
+          fullText += sshCommand.charAt(charIndex);
+          typedText.textContent = fullText;
+          typedText.appendChild(cursor);
+          charIndex++;
+          typedText.scrollTop = typedText.scrollHeight;
+          setTimeout(typeSSHCommand, 40);
+        } else {
+          fullText += "\n" + passwordPrompt;
+          typedText.textContent = fullText;
+          typedText.appendChild(cursor);
+          charIndex = 0;
+          setTimeout(typePassword, 500);
+        }
+      }
+
+      const password = "hunter2";
+      let passwordIndex = 0;
+
+      function typePassword() {
+        if (passwordIndex < password.length) {
+          fullText += "*";
+          typedText.textContent = fullText;
+          typedText.appendChild(cursor);
+          passwordIndex++;
+          typedText.scrollTop = typedText.scrollHeight;
+          setTimeout(typePassword, 80);
+        } else {
+          fullText += "\n" + sshBanner + initialPrompt.replace("local", "clarksec");
+          typedText.textContent = fullText;
+          typedText.appendChild(cursor);
+          passwordIndex = 0;
+          charIndex = 0;
+          setTimeout(typeBodyText, 500);
+          typedText.scrollTop = typedText.scrollHeight;
+        }
+      }
+
+      let bodyLineIndex = 0;
+      let bodyCharIndex = 0;
+
+      function typeBodyText() {
+        if (bodyLineIndex >= bodyLines.length) {
+          // Finished typing body text
+          typedText.textContent = fullText;
+          typedText.appendChild(cursor);
+          return;
+        }
+        const line = bodyLines[bodyLineIndex];
+        if (bodyCharIndex < line.length) {
+          fullText += line.charAt(bodyCharIndex);
+          typedText.textContent = fullText;
+          typedText.appendChild(cursor);
+          bodyCharIndex++;
+          typedText.scrollTop = typedText.scrollHeight;
+          setTimeout(typeBodyText, 40);
+        } else {
+          fullText += "\n";
+          typedText.textContent = fullText;
+          typedText.appendChild(cursor);
+          bodyLineIndex++;
+          bodyCharIndex = 0;
+          setTimeout(typeBodyText, 40);
+          typedText.scrollTop = typedText.scrollHeight;
+        }
+      }
+
+      setTimeout(typeSSHCommand, 500);
+    </script>
   </body>
 </html>
