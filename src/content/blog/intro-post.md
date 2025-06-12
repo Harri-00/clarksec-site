@@ -1,11 +1,11 @@
 ---
 title: 'Getting Started'
 description: 'An intro to ClarkSec and what this blog is all about.'
-pubDate: 'Jun 11 2025'
-heroImage: '../../assets/blog-placeholder-1.jpg'
+pubDate: 'Jun 10 2025'
+heroImage: '../../assets/gettingstarted.jpg'
 ---
 
-# Welcome to ClarkSec
+## Welcome to ClarkSec
 
 Hey I’m Harrison. I’ve been working in IT for a bit, and I’m currently studying cybersecurity while building out my skills through labs, writeups, and projects.
 
