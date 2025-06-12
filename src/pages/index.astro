@@ -11,9 +11,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
       #terminal {
-        width: 100%;
+        width: 90vw;           /* Responsive width */
         max-width: 900px;
-        height: 600px;
+        height: 60vh;          /* Responsive height */
+        max-height: 600px;
         background-color: #003366;
         border-radius: 8px;
         margin: 1rem auto;
@@ -22,6 +23,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
         flex-direction: column;
         font-family: monospace;
         color: white;
+        overflow: hidden;
       }
 
       #menu-bar {
@@ -77,6 +79,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
       @keyframes blink {
         0%, 50% { opacity: 1; }
         50.01%, 100% { opacity: 0; }
+      }
+
+      /* Smaller font on small screens */
+      @media (max-width: 480px) {
+        #typed-text {
+          font-size: 14px !important;
+        }
       }
     </style>
   </head>
