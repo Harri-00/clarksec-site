@@ -48,25 +48,25 @@ heroImage: "../../assets/letsdefend-social.png"
 
 To get started with this alert we will start by taking a look at the raw log from the **Log Management** page.
 
-![Pasted image 20250611141555.png](../../assets/Pasted%20image%2020250611141555.png)
+![Pasted image 20250611141555.png](../../assets/Pasted-image-20250611141555.png)
 
 After reviewing the raw log data we can move on to the **Endpoint Security** page. We can quickly see there's a suspicious `update.py` that ran at the same time as the alert in the processes tab. The event involving `update.py` also includes an image hash that we can look into.
 
-![Pasted image 20250611141848.png](../../assets/Pasted%20image%2020250611141848.png)
+![Pasted image 20250611141848.png](../../assets/Pasted-image-20250611141848.png)
 
 When we search for the image hash in VirusTotal, we can see that the file is indeed malicious.
 
-![Pasted image 20250611142124.png](../../assets/Pasted%20image%2020250611142124.png)
+![Pasted image 20250611142124.png](../../assets/Pasted-image-20250611142124.png)
 
 In the network action tab we confirm that there was an outbound request to the malicious IP (144.172.79.92), so we will take action and contain `PA-Firewall-01`. We can see that this IP is malicious by looking at the Threat Intel tab.
 
-![Pasted image 20250611143938.png](../../assets/Pasted%20image%2020250611143938.png)
-![Pasted image 20250611144125.png](../../assets/Pasted%20image%2020250611144125.png)
-![Pasted image 20250611144012.png](../../assets/Pasted%20image%2020250611144012.png)
+![Pasted image 20250611143938.png](../../assets/Pasted-image-20250611143938.png)  
+![Pasted image 20250611144125.png](../../assets/Pasted-image-20250611144125.png)  
+![Pasted image 20250611144012.png](../../assets/Pasted-image-20250611144012.png)
 
 If we do a deeper dive on the malicious IP address, we can see that 10/94 security vendors have marked it as malicious in VirusTotal.
 
-![Pasted image 20250611144346.png](../../assets/Pasted%20image%2020250611144346.png)
+![Pasted image 20250611144346.png](../../assets/Pasted-image-20250611144346.png)
 
 With a Whois lookup, we can see that the IP is tied to RouterHosting LLC and FranTech Solutions.
 
@@ -97,7 +97,7 @@ We then began executing the SOC274 playbook.
 
 * We selected **Command Injection** due to the command syntax in the cookie.
 
-![Pasted image 20250611150829.png](../../assets/Pasted%20image%2020250611150829.png)
+![Pasted image 20250611150829.png](../../assets/Pasted-image-20250611150829.png)
 
 ### Check If It Is a Planned Test
 
@@ -105,8 +105,8 @@ We then began executing the SOC274 playbook.
 * No results found.  
 * We selected **Not Planned**.
 
-![Pasted image 20250611151027.png](../../assets/Pasted%20image%2020250611151027.png)
-![Pasted image 20250611151354.png](../../assets/Pasted%20image%2020250611151354.png)
+![Pasted image 20250611151027.png](../../assets/Pasted-image-20250611151027.png)  
+![Pasted image 20250611151354.png](../../assets/Pasted-image-20250611151354.png)
 
 ### What Is the Direction of Traffic?
 
@@ -123,26 +123,26 @@ We then began executing the SOC274 playbook.
 
 * We isolated `PA-Firewall-01` from the network.
 
-![Pasted image 20250611155530.png](../../assets/Pasted%20image%2020250611155530.png)
+![Pasted image 20250611155530.png](../../assets/Pasted-image-20250611155530.png)
 
 ### Artifacts
 
 * We documented the malicious IP.  
 * No emails, URLs, or MD5 hashes were deemed actionable.
 
-![Pasted image 20250611161944.png](../../assets/Pasted%20image%2020250611161944.png)
+![Pasted image 20250611161944.png](../../assets/Pasted-image-20250611161944.png)
 
 ### Tier 2 Escalation
 
 * Due to confirmed exploitation and outbound connection, we escalated to Tier 2.
 
-![Pasted image 20250611162348.png](../../assets/Pasted%20image%2020250611162348.png)
+![Pasted image 20250611162348.png](../../assets/Pasted-image-20250611162348.png)
 
 ### Analyst Note
 
 "The alert was triggered by a command injection attempt targeting the Palo Alto firewall’s GlobalProtect login interface, exploiting CVE-2024-3400 via malicious cookie payload. The source IP belongs to a bulletproof hosting provider with a poor reputation, indicating a likely external attacker. Outbound traffic analysis shows no evidence of successful lateral movement or compromise within the internal network. Based on current evidence, the attack did not succeed in gaining internal access. Recommend continued monitoring and reviewing firewall patch status."
 
-![Pasted image 20250611162932.png](../../assets/Pasted%20image%2020250611162932.png)
+![Pasted image 20250611162932.png](../../assets/Pasted-image-20250611162932.png)
 
 ---
 

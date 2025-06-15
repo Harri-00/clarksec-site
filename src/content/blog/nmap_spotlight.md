@@ -55,7 +55,7 @@ nmap -sC -sV -T4 -oN scan.nmap <Target IP>
     
 - `<Target IP>`: Replace this with the HTB box IP
 
-![Nmap basic scan output](../../assets/Pasted%20image%2020250613110352.png)
+![Nmap basic scan output](../../assets/Pasted-image-20250613110352.png)
 
 For this example I used a box named "Planning" on hack the box and as we can see the output of this scan is giving us a lot of good information to work with. We now know that the machine has an open website and SSH. It also gives us the versions that each service is running.
 ### Full TCP Port Scan
@@ -69,7 +69,7 @@ nmap -p- --open -T4 <Target IP>
 
 This checks all 65535 TCP ports and helps catch services running on non-standard ports.
 
-![Nmap full TCP port scan output](../../assets/Pasted%20image%2020250613105202.png)
+![Nmap full TCP port scan output](../../assets/Pasted-image-20250613105202.png)
 
 
 As expected the TCP scan did not give us much info to work with as its sort of a higher level scan. From the results of this scan we know that port 22 and port 80 are open but we dont get any version information.
@@ -89,7 +89,7 @@ nmap -sC -sV -p22,80,443 <Target IP> -oN scan.nmap
     
 - `-oN`: Save results in normal output format to scan.nmap
 
-![Nmap service version detection output](../../assets/Pasted%20image%2020250613105334.png)
+![Nmap service version detection output](../../assets/Pasted-image-20250613105334.png)
 
 As you can see from the output above, this scan reveals service banners and version details, which are crucial for identifying possible vulnerabilities or misconfigurations. It's a lighter, more targeted version of the full scan and is great when you're short on time or just want to confirm what's running on specific ports.
 
