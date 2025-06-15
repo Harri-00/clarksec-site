@@ -24,7 +24,7 @@ This writeup details my solutions and approaches to some of my favorite challeng
 
 ## Web Security
 
-### Field Reports Mayhem – 150 pts – 20.08
+### Field Reports Mayhem – 150 pts 
 
 We've gained access to the Juche Jaguar's Field Reports archive through an operative's use of weak credentials. Upon logging in, the operative sees their previous field reports and can file new ones. Somewhere in here, I am sure some 'leet' agent stashed the Supreme Leader's secret pizza discount code!
 
@@ -59,7 +59,7 @@ This challenge combined technical enumeration with creative interpretation of te
 
 ---
 
-### None Shall Pass – 200 pts – 40.15
+### None Shall Pass – 200 pts 
 
 Deep inside Juche Jaguar's intranet runs a custom token-based gateway protecting their most sensitive files at `/secret`. We got our hands on a low-privilege account (user:pass = `agent:spudpotato`) — use it to request an access token, then find a way to trick the gateway into granting you full admin rights and pull down the hidden intelligence (the flag) from `/secret`. Good luck, Operative.
 
@@ -98,7 +98,7 @@ A great example of why tokens must always be cryptographically signed and valida
 
 ## Forensics
 
-### Listening Post – 150 pts – 2.40.40
+### Listening Post – 150 pts 
 
 We've intercepted a radio broadcast being bounced off a satellite likely intended for the North Torbian cells located around the world. Do you think you can unravel what they are transmitting?
 
@@ -142,7 +142,7 @@ DTMF tones can be used as a covert channel to encode binary data in audio files.
 
 ## OSINT
 
-### Problems in North TORbia – 150 pts – 3.13.52
+### Problems in North TORbia – 150 pts 
 
 We were given a ransom note but none of our files were encrypted. Regardless, could you run it back and see what information could be gleaned from it?
 
@@ -170,7 +170,7 @@ Sometimes, hidden information can be revealed by inspecting source code even whe
 
 ---
 
-### Inspo. – 200 pts – 3.44.03
+### Inspo. – 200 pts 
 
 We believe that the North Torbians are heavily influenced by North Korean developments and wish to match them. We have suspicions that Juche Jaguar will try to build out similar spaces to ones in these pictures. Can you find the coordinates of where these pictures were taken?
 
@@ -194,7 +194,7 @@ When metadata is missing, image reverse search is a powerful tool for geolocatio
 
 ## Networking
 
-### Packet Whisperer – 75 pts – 1.54.46
+### Packet Whisperer – 75 pts 
 
 Our blue team intercepted a network capture file. It contains unencrypted HTTP traffic. While skimming through it, analysts believe someone accidentally exposed their login credentials in plain text. Review the PCAP to find the password that the user logged in with.
 
@@ -213,7 +213,7 @@ Cleartext network protocols expose sensitive information easily; always use encr
 
 ## Recon
 
-### Hoasted Toasted – 150 pts – 2.59.30
+### Hoasted Toasted – 150 pts 
 
 We have discovered what we believe is a North Torbian public website and have suspicions there is a secret internal-only site hidden there as well. Figure out how to connect to the hidden site and find the flag!
 
@@ -252,7 +252,7 @@ Inspecting SSL certificates can expose alternate domain names intended for inter
 
 ---
 
-### Screamin' Streamin' – 200 pts – 3.12.35
+### Screamin' Streamin' – 200 pts 
 
 We've received intel that Juche Jaguar has exposed a network stream on the host `34.85.185.78` between TCP ports 5000 and 10000. Once you find the port, connect to the correct stream name and report back with a flag.
 
