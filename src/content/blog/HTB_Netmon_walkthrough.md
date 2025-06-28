@@ -1,7 +1,7 @@
 ---
 title: "Netmon HTB Walkthrough: Exploiting Anonymous FTP and PRTG Network Monitor RCE for Full System Access"  
 description: "Comprehensive walkthrough of the retired Hack The Box machine Netmon, detailing anonymous FTP enumeration, credential extraction from PRTG configuration files, exploiting CVE-2018-9276 for remote code execution, and achieving reverse shell with system privileges."  
-pubDate: 'Jun 27 2025'  
+pubDate: 'Jun 28 2025'  
 heroImage: "../../assets/Hack-The-Box-logo.png"  
 ---
 
