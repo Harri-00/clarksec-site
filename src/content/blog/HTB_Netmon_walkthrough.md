@@ -69,8 +69,6 @@ Since the password in the current configuration file was encrypted or hashed rat
 ![Pasted-image-20250627151424.png](../../assets/Pasted-image-20250627151424.png)  
 
 ## Exploitation
-
-## Exploitation
 After confirming the PRTG version as 18.1.37.13946, I researched known vulnerabilities and identified **CVE-2018-9276**. This vulnerability affects PRTG Network Monitor versions prior to 18.2.39 and allows operating system command injection through the sensor or notification management features.
 
 **Important:** This vulnerability requires authenticated access with administrative privileges to the PRTG web console. Once authenticated, an attacker can send specially crafted parameters to execute arbitrary commands on the server.
